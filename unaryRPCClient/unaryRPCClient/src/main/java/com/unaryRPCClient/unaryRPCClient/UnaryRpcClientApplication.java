@@ -19,7 +19,7 @@ public class UnaryRpcClientApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("GRPC Client Response: "+clientService.getStockPrice("AAPL"));
+		clientService.subscribeStockPrice("AAPL");
 
 	}
 }
