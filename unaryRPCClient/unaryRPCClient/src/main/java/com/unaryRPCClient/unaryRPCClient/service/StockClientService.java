@@ -5,6 +5,8 @@ import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
+import static java.lang.Thread.sleep;
+
 @Service
 public class StockClientService {
     @GrpcClient("stockService")
@@ -71,5 +73,32 @@ public class StockClientService {
         }catch(Exception e){
             requestObserver.onError(e);
         }
+    }
+
+    public void startLiveTrading() throws InterruptedException {
+        StreamObserver<StockOrder> requestObserver = stockTradingServiceStub.liveTrading(new StreamObserver<>() {
+            @Override
+            public void onNext(TradeStatus tradeStatus) {
+                System.out.println("Server response : " + tradeStatus);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                System.out.println("Server error: " + throwable.getMessage());
+
+            }
+
+            @Override
+            public void onCompleted() {
+                System.out.println("stream completed!");
+
+            }
+        });
+        for(int i=1;i<=10;i++){
+            StockOrder stockOrder =StockOrder.newBuilder().setOrderId("order-"+i).setStockSymbol("APPL").setQuantity(i*10).setOrderType("BUY").setPrice(150.0+i).build();
+            requestObserver.onNext(stockOrder);
+            Thread.sleep(500);
+        }
+        requestObserver.onCompleted();
     }
 }

@@ -6,6 +6,7 @@ option java_multiple_files=true;
 option java_package="com.unaryRPCClient";
 option java_outer_classname="StockTradingProto";
 
+
 service StockTradingService{
   //  UNARY - RPC -> get current stock price
   rpc getStockPrice(StockRequest) returns (StockResponse);
@@ -15,7 +16,11 @@ service StockTradingService{
 
   //  client streaming
   rpc bulkStockOrder(stream StockOrder) returns (OrderSummary);
+
+  //  bidirectional streaming
+  rpc liveTrading(stream StockOrder) returns (stream TradeStatus);
 }
+
 
 message StockRequest{
   string stock_symbol=1;
@@ -38,4 +43,11 @@ message OrderSummary{
   int32 total_orders=1;
   double total_amount=2;
   int32 success_count=3;
+}
+
+message TradeStatus{
+  string order_id=1;
+  string status=2; //EXECUTE, FAIL, PENDING
+  string message=3; // Reason if failed or success message
+  string timestamp=4;
 }

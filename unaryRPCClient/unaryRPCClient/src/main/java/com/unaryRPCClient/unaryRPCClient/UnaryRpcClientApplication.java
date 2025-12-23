@@ -20,6 +20,9 @@ public class UnaryRpcClientApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 //		clientService.subscribeStockPrice("AAPL");
-		clientService.placeBulkOrders();
+//		clientService.placeBulkOrders();
+		clientService.startLiveTrading();
 	}
+
+
 }
