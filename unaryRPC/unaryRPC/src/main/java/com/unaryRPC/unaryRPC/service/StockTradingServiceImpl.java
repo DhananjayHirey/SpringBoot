@@ -1,9 +1,7 @@
 package com.unaryRPC.unaryRPC.service;
 
 
-import com.unaryRPC.StockRequest;
-import com.unaryRPC.StockResponse;
-import com.unaryRPC.StockTradingServiceGrpc;
+import com.unaryRPC.*;
 import com.unaryRPC.unaryRPC.entity.Stock;
 import com.unaryRPC.unaryRPC.repository.StockRepository;
 import io.grpc.stub.StreamObserver;
@@ -56,5 +54,36 @@ public class StockTradingServiceImpl extends StockTradingServiceGrpc.StockTradin
             responseObserver.onError(ex);
 
         }
+    }
+
+    @Override
+    public StreamObserver<StockOrder> bulkStockOrder(StreamObserver<OrderSummary> responseObserver) {
+        return new StreamObserver<StockOrder>() {
+
+            private int totalOrders=0;
+            private double totalAmount=0;
+            private int successCount=0;
+
+            @Override
+            public void onNext(StockOrder stockOrder) {
+                totalOrders++;
+                totalAmount+=stockOrder.getPrice()*stockOrder.getQuantity();
+                successCount++;
+                System.out.println("Received order: "+stockOrder);
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                System.out.println("Server unable to process request");
+
+            }
+
+            @Override
+            public void onCompleted() {
+                com.unaryRPC.OrderSummary orderSummary =OrderSummary.newBuilder().setTotalOrders(totalOrders).setSuccessCount(successCount).setTotalAmount(totalAmount).build();
+                responseObserver.onNext(orderSummary);
+                responseObserver.onCompleted();
+            }
+        };
     }
 }
