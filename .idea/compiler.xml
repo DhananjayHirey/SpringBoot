@@ -2,19 +2,39 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Annotation profile for unaryRPC" enabled="true">
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Annotation profile for kafkaconsumer" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
+        </processorPath>
+        <module name="ReactiveProject" />
+        <module name="unaryRPC" />
+        <module name="kafkaproducer" />
+        <module name="kafkaconsumer" />
+      </profile>
+      <profile name="Annotation profile for newkafkaproducer" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
         </processorPath>
-        <module name="unaryRPC" />
+        <module name="newkafkaproducer" />
+        <module name="newkafkaconsumer" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ReactiveProject" options="-parameters" />
+      <module name="kafkaconsumer" options="-parameters" />
+      <module name="kafkaproducer" options="-parameters" />
+      <module name="newkafkaconsumer" options="-parameters" />
+      <module name="newkafkaproducer" options="-parameters" />
       <module name="unaryRPC" options="-parameters" />
     </option>
   </component>

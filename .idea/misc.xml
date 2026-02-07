@@ -5,6 +5,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/unaryRPC/unaryRPC/pom.xml" />
+        <option value="$PROJECT_DIR$/ReactiveProject/ReactiveProject/pom.xml" />
+        <option value="$PROJECT_DIR$/kafkaproducer/kafkaproducer/pom.xml" />
+        <option value="$PROJECT_DIR$/kafkaconsumer/kafkaconsumer/pom.xml" />
+        <option value="$PROJECT_DIR$/newkafkaproducer/newkafkaproducer/pom.xml" />
+        <option value="$PROJECT_DIR$/newkafkaconsumer/newkafkaconsumer/pom.xml" />
       </list>
     </option>
   </component>
