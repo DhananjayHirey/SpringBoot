@@ -6,6 +6,7 @@
     <file url="file://$PROJECT_DIR$/kafkaproducer/kafkaproducer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/newkafkaconsumer/newkafkaconsumer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/newkafkaproducer/newkafkaproducer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/springsecurity/springsecurity/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/unaryRPC/unaryRPC/src/main/java" charset="UTF-8" />
   </component>
 </project>
